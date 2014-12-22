@@ -9,10 +9,14 @@
 /* Begin PBXBuildFile section */
 		AA23A0C51A47B5AE009D9492 /* ResourcePath.mm in Sources */ = {isa = PBXBuildFile; fileRef = AA23A0C41A47B5AE009D9492 /* ResourcePath.mm */; };
 		AA23A0C81A47B5AE009D9492 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA23A0C71A47B5AE009D9492 /* main.cpp */; };
-		AA23A0CB1A47B5AE009D9492 /* cute_image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA23A0CA1A47B5AE009D9492 /* cute_image.jpg */; };
-		AA23A0CD1A47B5AE009D9492 /* nice_music.ogg in Resources */ = {isa = PBXBuildFile; fileRef = AA23A0CC1A47B5AE009D9492 /* nice_music.ogg */; };
-		AA23A0CF1A47B5AE009D9492 /* sansation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AA23A0CE1A47B5AE009D9492 /* sansation.ttf */; };
-		AA23A0D11A47B5AE009D9492 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = AA23A0D01A47B5AE009D9492 /* icon.png */; };
+		AA23A0D81A47B6F0009D9492 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA23A0D71A47B6F0009D9492 /* OpenGL.framework */; };
+		AA23A0DA1A47B701009D9492 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA23A0D91A47B701009D9492 /* SDL2.framework */; };
+		AA23A0E01A47B784009D9492 /* EvolutionSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA23A0DE1A47B784009D9492 /* EvolutionSystem.cpp */; };
+		AA23A0E31A47B8B6009D9492 /* GLManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA23A0E11A47B8B6009D9492 /* GLManager.cpp */; };
+		AA23A0E51A47B9A0009D9492 /* glm in Resources */ = {isa = PBXBuildFile; fileRef = AA23A0E41A47B9A0009D9492 /* glm */; };
+		AA23A0E71A47BA5A009D9492 /* fragmentShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = AA23A0E61A47BA5A009D9492 /* fragmentShader.glsl */; };
+		AA23A0E91A47BA61009D9492 /* vertexShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = AA23A0E81A47BA61009D9492 /* vertexShader.glsl */; };
+		AA23A0EC1A47BB1F009D9492 /* Agent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA23A0EA1A47BB1F009D9492 /* Agent.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,10 +25,17 @@
 		AA23A0C41A47B5AE009D9492 /* ResourcePath.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ResourcePath.mm; sourceTree = "<group>"; };
 		AA23A0C61A47B5AE009D9492 /* ResourcePath.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ResourcePath.hpp; sourceTree = "<group>"; };
 		AA23A0C71A47B5AE009D9492 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		AA23A0CA1A47B5AE009D9492 /* cute_image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cute_image.jpg; sourceTree = "<group>"; };
-		AA23A0CC1A47B5AE009D9492 /* nice_music.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = nice_music.ogg; sourceTree = "<group>"; };
-		AA23A0CE1A47B5AE009D9492 /* sansation.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sansation.ttf; sourceTree = "<group>"; };
-		AA23A0D01A47B5AE009D9492 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		AA23A0D71A47B6F0009D9492 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		AA23A0D91A47B701009D9492 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL2.framework; sourceTree = "<group>"; };
+		AA23A0DE1A47B784009D9492 /* EvolutionSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EvolutionSystem.cpp; sourceTree = "<group>"; };
+		AA23A0DF1A47B784009D9492 /* EvolutionSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvolutionSystem.h; sourceTree = "<group>"; };
+		AA23A0E11A47B8B6009D9492 /* GLManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLManager.cpp; sourceTree = "<group>"; };
+		AA23A0E21A47B8B6009D9492 /* GLManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLManager.h; sourceTree = "<group>"; };
+		AA23A0E41A47B9A0009D9492 /* glm */ = {isa = PBXFileReference; lastKnownFileType = folder; path = glm; sourceTree = "<group>"; };
+		AA23A0E61A47BA5A009D9492 /* fragmentShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fragmentShader.glsl; sourceTree = "<group>"; };
+		AA23A0E81A47BA61009D9492 /* vertexShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vertexShader.glsl; sourceTree = "<group>"; };
+		AA23A0EA1A47BB1F009D9492 /* Agent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Agent.cpp; sourceTree = "<group>"; };
+		AA23A0EB1A47BB1F009D9492 /* Agent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Agent.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +43,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA23A0D81A47B6F0009D9492 /* OpenGL.framework in Frameworks */,
+				AA23A0DA1A47B701009D9492 /* SDL2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -41,6 +54,8 @@
 		AA23A0B51A47B5AE009D9492 = {
 			isa = PBXGroup;
 			children = (
+				AA23A0D91A47B701009D9492 /* SDL2.framework */,
+				AA23A0D71A47B6F0009D9492 /* OpenGL.framework */,
 				AA23A0C11A47B5AE009D9492 /* NetEvolution */,
 				AA23A0C01A47B5AE009D9492 /* Products */,
 			);
@@ -57,11 +72,18 @@
 		AA23A0C11A47B5AE009D9492 /* NetEvolution */ = {
 			isa = PBXGroup;
 			children = (
+				AA23A0E41A47B9A0009D9492 /* glm */,
+				AA23A0E11A47B8B6009D9492 /* GLManager.cpp */,
+				AA23A0E21A47B8B6009D9492 /* GLManager.h */,
 				AA23A0C41A47B5AE009D9492 /* ResourcePath.mm */,
 				AA23A0C61A47B5AE009D9492 /* ResourcePath.hpp */,
 				AA23A0C71A47B5AE009D9492 /* main.cpp */,
 				AA23A0C91A47B5AE009D9492 /* Resources */,
 				AA23A0C21A47B5AE009D9492 /* Supporting Files */,
+				AA23A0DE1A47B784009D9492 /* EvolutionSystem.cpp */,
+				AA23A0DF1A47B784009D9492 /* EvolutionSystem.h */,
+				AA23A0EA1A47BB1F009D9492 /* Agent.cpp */,
+				AA23A0EB1A47BB1F009D9492 /* Agent.h */,
 			);
 			path = NetEvolution;
 			sourceTree = "<group>";
@@ -77,10 +99,8 @@
 		AA23A0C91A47B5AE009D9492 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				AA23A0CA1A47B5AE009D9492 /* cute_image.jpg */,
-				AA23A0CC1A47B5AE009D9492 /* nice_music.ogg */,
-				AA23A0CE1A47B5AE009D9492 /* sansation.ttf */,
-				AA23A0D01A47B5AE009D9492 /* icon.png */,
+				AA23A0E61A47BA5A009D9492 /* fragmentShader.glsl */,
+				AA23A0E81A47BA61009D9492 /* vertexShader.glsl */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -95,7 +115,6 @@
 				AA23A0BA1A47B5AE009D9492 /* Sources */,
 				AA23A0BB1A47B5AE009D9492 /* Frameworks */,
 				AA23A0BC1A47B5AE009D9492 /* Resources */,
-				AA23A0BD1A47B5AE009D9492 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -142,38 +161,24 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA23A0D11A47B5AE009D9492 /* icon.png in Resources */,
-				AA23A0CF1A47B5AE009D9492 /* sansation.ttf in Resources */,
-				AA23A0CD1A47B5AE009D9492 /* nice_music.ogg in Resources */,
-				AA23A0CB1A47B5AE009D9492 /* cute_image.jpg in Resources */,
+				AA23A0E91A47BA61009D9492 /* vertexShader.glsl in Resources */,
+				AA23A0E71A47BA5A009D9492 /* fragmentShader.glsl in Resources */,
+				AA23A0E51A47B9A0009D9492 /* glm in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		AA23A0BD1A47B5AE009D9492 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# This shell script simply copies required sfml dylibs/frameworks into the application bundle frameworks folder.\n# If you're using static libraries (which is not recommended) you should remove this script from your project.\n\n# Are we building a project that uses framework or dylibs ?\ncase \"$SFML_BINARY_TYPE\" in\n    DYLIBS)\n        frameworks=\"false\"\n        ;;\n    *)\n        frameworks=\"true\"\n        ;;\nesac\n\n# Echoes to stderr\nerror () # $* message to display\n{\n    echo $* 1>&2\n    exit 2\n}\n\nassert () # $1 is a boolean, $2...N is an error message\n{\n    if [ $# -lt 2 ]\n    then\n        error \"Internal error in assert : not enough args\"\n    fi\n\n    if [ $1 -ne 0 ]\n    then\n        shift\n        error \"$*\"\n    fi\n}\n\nforce_remove () # $1 is a path\n{\n    test $# -eq 1\n    assert $? \"force_remove() requires one parameter\"\n    rm -fr \"$1\"\n    assert $? \"couldn't remove $1\"\n}\n\ncopy () # $1 is a source, $2 is a destination\n{\n    test $# -eq 2\n    assert $? \"copy() requires two parameters\"\n    ditto \"$1\" \"$2\"\n    assert $? \"couldn't copy $1 to $2\"\n}\n\nrequire () # $1 is a SFML module like 'system' or 'audio'\n{\n    dest=\"$BUILT_PRODUCTS_DIR/$PRODUCT_NAME.app/Contents/Frameworks\"\n\n    if [ -z \"$1\" ]\n    then\n        error \"require() requires one parameter!\"\n    else\n        # clean potentially old stuff\n        force_remove \"$dest/libsfml-$1.2.dylib\"\n        force_remove \"$dest/libsfml-$1-d.2.dylib\"\n        force_remove \"$dest/sfml-$1.framework\"\n\n        # copy SFML libraries\n        if [ \"$frameworks\" = \"true\" ]\n        then\n            copy \"/Library/Frameworks/sfml-$1.framework\" \"$dest/sfml-$1.framework\"\n        elif [ \"$SFML_LINK_DYLIBS_SUFFIX\" = \"-d\" ]\n        then\n            copy \"/usr/local/lib/libsfml-$1-d.2.dylib\" \"$dest/libsfml-$1-d.2.dylib\"\n        else\n            copy \"/usr/local/lib/libsfml-$1.2.dylib\" \"$dest/libsfml-$1.2.dylib\"\n        fi\n\n        if [ \"$1\" = \"audio\" ]\n        then\n            # copy sndfile framework too\n            copy \"/Library/Frameworks/sndfile.framework\" \"$dest/sndfile.framework\"\n        fi\n\n        if [ \"$1\" = \"graphics\" ]\n        then\n            # copy freetype framework too\n            copy \"/Library/Frameworks/freetype.framework\" \"$dest/freetype.framework\"\n        fi\n    fi\n}\n\nif [ -n \"$SFML_SYSTEM\" ]\nthen\n    require \"system\"\nfi\n\nif [ -n \"$SFML_AUDIO\" ]\nthen\n    require \"audio\"\nfi\n\nif [ -n \"$SFML_NETWORK\" ]\nthen\n    require \"network\"\nfi\n\nif [ -n \"$SFML_WINDOW\" ]\nthen\n    require \"window\"\nfi\n\nif [ -n \"$SFML_GRAPHICS\" ]\nthen\n    require \"graphics\"\nfi\n\n                ";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		AA23A0BA1A47B5AE009D9492 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA23A0EC1A47BB1F009D9492 /* Agent.cpp in Sources */,
+				AA23A0E31A47B8B6009D9492 /* GLManager.cpp in Sources */,
 				AA23A0C81A47B5AE009D9492 /* main.cpp in Sources */,
 				AA23A0C51A47B5AE009D9492 /* ResourcePath.mm in Sources */,
+				AA23A0E01A47B784009D9492 /* EvolutionSystem.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -218,17 +223,6 @@
 					"$(SFML_AUDIO)",
 					"$(SFML_NETWORK)",
 				);
-				SFML_AUDIO = "";
-				SFML_BINARY_TYPE = FRAMEWORKS;
-				SFML_LINK_DYLIBS_PREFIX = "-l";
-				SFML_LINK_DYLIBS_SUFFIX = "";
-				SFML_LINK_FRAMEWORKS_PREFIX = "-framework";
-				SFML_LINK_FRAMEWORKS_SUFFIX = "";
-				SFML_LINK_PREFIX = "$(SFML_LINK_$(SFML_BINARY_TYPE)_PREFIX)";
-				SFML_LINK_SUFFIX = "$(SFML_LINK_$(SFML_BINARY_TYPE)_SUFFIX)";
-				SFML_NETWORK = "";
-				SFML_SYSTEM = "$(SFML_LINK_PREFIX) sfml-system$(SFML_LINK_SUFFIX)";
-				SFML_WINDOW = "";
 				SUPPORTED_PLATFORMS = macosx;
 			};
 			name = Debug;
@@ -267,17 +261,6 @@
 					"$(SFML_AUDIO)",
 					"$(SFML_NETWORK)",
 				);
-				SFML_AUDIO = "";
-				SFML_BINARY_TYPE = FRAMEWORKS;
-				SFML_LINK_DYLIBS_PREFIX = "-l";
-				SFML_LINK_DYLIBS_SUFFIX = "";
-				SFML_LINK_FRAMEWORKS_PREFIX = "-framework";
-				SFML_LINK_FRAMEWORKS_SUFFIX = "";
-				SFML_LINK_PREFIX = "$(SFML_LINK_$(SFML_BINARY_TYPE)_PREFIX)";
-				SFML_LINK_SUFFIX = "$(SFML_LINK_$(SFML_BINARY_TYPE)_SUFFIX)";
-				SFML_NETWORK = "";
-				SFML_SYSTEM = "$(SFML_LINK_PREFIX) sfml-system$(SFML_LINK_SUFFIX)";
-				SFML_WINDOW = "";
 				SUPPORTED_PLATFORMS = macosx;
 			};
 			name = Release;
@@ -285,7 +268,12 @@
 		AA23A0D51A47B5AE009D9492 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "NetEvolution/NetEvolution-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -293,7 +281,12 @@
 		AA23A0D61A47B5AE009D9492 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "NetEvolution/NetEvolution-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
