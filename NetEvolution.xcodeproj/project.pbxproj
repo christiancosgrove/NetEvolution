@@ -17,6 +17,8 @@
 		AA23A0E71A47BA5A009D9492 /* fragmentShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = AA23A0E61A47BA5A009D9492 /* fragmentShader.glsl */; };
 		AA23A0E91A47BA61009D9492 /* vertexShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = AA23A0E81A47BA61009D9492 /* vertexShader.glsl */; };
 		AA23A0EC1A47BB1F009D9492 /* Agent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA23A0EA1A47BB1F009D9492 /* Agent.cpp */; };
+		AA23A0EF1A47BDA7009D9492 /* Brain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA23A0ED1A47BDA7009D9492 /* Brain.cpp */; };
+		AA23A0F21A47BDC1009D9492 /* Neuron.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA23A0F01A47BDC1009D9492 /* Neuron.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,10 @@
 		AA23A0E81A47BA61009D9492 /* vertexShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vertexShader.glsl; sourceTree = "<group>"; };
 		AA23A0EA1A47BB1F009D9492 /* Agent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Agent.cpp; sourceTree = "<group>"; };
 		AA23A0EB1A47BB1F009D9492 /* Agent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Agent.h; sourceTree = "<group>"; };
+		AA23A0ED1A47BDA7009D9492 /* Brain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Brain.cpp; sourceTree = "<group>"; };
+		AA23A0EE1A47BDA7009D9492 /* Brain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Brain.h; sourceTree = "<group>"; };
+		AA23A0F01A47BDC1009D9492 /* Neuron.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Neuron.cpp; sourceTree = "<group>"; };
+		AA23A0F11A47BDC1009D9492 /* Neuron.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Neuron.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +90,10 @@
 				AA23A0DF1A47B784009D9492 /* EvolutionSystem.h */,
 				AA23A0EA1A47BB1F009D9492 /* Agent.cpp */,
 				AA23A0EB1A47BB1F009D9492 /* Agent.h */,
+				AA23A0ED1A47BDA7009D9492 /* Brain.cpp */,
+				AA23A0EE1A47BDA7009D9492 /* Brain.h */,
+				AA23A0F01A47BDC1009D9492 /* Neuron.cpp */,
+				AA23A0F11A47BDC1009D9492 /* Neuron.h */,
 			);
 			path = NetEvolution;
 			sourceTree = "<group>";
@@ -174,7 +184,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA23A0EF1A47BDA7009D9492 /* Brain.cpp in Sources */,
 				AA23A0EC1A47BB1F009D9492 /* Agent.cpp in Sources */,
+				AA23A0F21A47BDC1009D9492 /* Neuron.cpp in Sources */,
 				AA23A0E31A47B8B6009D9492 /* GLManager.cpp in Sources */,
 				AA23A0C81A47B5AE009D9492 /* main.cpp in Sources */,
 				AA23A0C51A47B5AE009D9492 /* ResourcePath.mm in Sources */,

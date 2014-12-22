@@ -6,9 +6,9 @@
 //  Created by Christian on 12/21/14.
 //  Copyright (c) 2014 Christian Cosgrove. All rights reserved.
 //
-#include "glm/glm.hpp"
-
 #pragma once
+#include "glm/glm.hpp"
+#include "Brain.h"
 
 struct AgentRenderNode
 {

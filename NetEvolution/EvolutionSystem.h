@@ -27,7 +27,9 @@ private:
     void generateBuffers();
     void updateBuffers();
     std::vector<AgentRenderNode> renderNodes;
+    std::vector<Agent> agents;
     void draw();
     void update();
     void handleEvents();
+    void initializeAgents();
 };

@@ -32,7 +32,7 @@ EvolutionSystem::EvolutionSystem()
     
     
     GLManager glManager(resourcePath() + "fragmentShader.glsl", resourcePath() + "vertexShader.glsl");
-    
+    initializeAgents();
     while (CurrentProgramState==ProgramState::RUN)
     {
         update();
@@ -41,6 +41,22 @@ EvolutionSystem::EvolutionSystem()
         SDL_GL_SwapWindow(window);
     }
     
+}
+
+void EvolutionSystem::initializeAgents()
+{
+    const int w = 3;
+    const float m = 1.5f;
+    for (int i = 0; i<w;i++)
+    {
+        for (int j = 0; j<w;j++)
+        {
+            for (int k = 0; j<w;k++)
+            {
+                agents.push_back(Agent(glm::vec3(m*i,m*j,m*k)));
+            }
+        }
+    }
 }
 
 
@@ -71,10 +87,39 @@ void EvolutionSystem::draw()
 {
     glClear(GL_COLOR_BUFFER_BIT);
     
+    updateBuffers();
     
+    glBindVertexArray(vao);
+    glDrawArrays(GL_POINTS, 0, renderNodes.size());
+    glBindVertexArray(0);
 }
 
 void EvolutionSystem::update()
 {
+    for (Agent& agent:agents)
+    {
+        agent.Update();
+    }
+}
+
+void EvolutionSystem::generateBuffers()
+{
+    glGenVertexArrays(1,&vao);
+    glBindVertexArray(vao);
+    glGenBuffers(1, &vbo);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(AgentRenderNode), (void*)__offsetof(AgentRenderNode, position));
+    glBindVertexArray(0);
+}
+
+void EvolutionSystem::updateBuffers()
+{
+    renderNodes.clear();
+    renderNodes.reserve(agents.size());
+    for (Agent& agent:agents) renderNodes.push_back(agent.GetRenderNode());
     
+    glBindVertexArray(vao);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(AgentRenderNode) * renderNodes.size(), &renderNodes[0], GL_DYNAMIC_DRAW);
+    glBindVertexArray(0);
 }

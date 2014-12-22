@@ -1,21 +1,15 @@
 //
-//  Agent.cpp
+//  Brain.cpp
 //  NetEvolution
 //
 //  Created by Christian on 12/21/14.
 //  Copyright (c) 2014 Christian Cosgrove. All rights reserved.
 //
 
-#include "Agent.h"
+#include "Brain.h"
 
 
-Agent::Agent(glm::vec3 position) : Position(position)
+Brain::Brain()
 {
     
 }
-
-void Agent::Update()
-{
-    
-}
-
