@@ -19,6 +19,8 @@
 		AA23A0EC1A47BB1F009D9492 /* Agent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA23A0EA1A47BB1F009D9492 /* Agent.cpp */; };
 		AA23A0EF1A47BDA7009D9492 /* Brain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA23A0ED1A47BDA7009D9492 /* Brain.cpp */; };
 		AA23A0F21A47BDC1009D9492 /* Neuron.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA23A0F01A47BDC1009D9492 /* Neuron.cpp */; };
+		CA9901E61A48459B00190E1B /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CA9901E41A48459B00190E1B /* Camera.cpp */; };
+		CA9901E91A4891C000190E1B /* RandomUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CA9901E71A4891C000190E1B /* RandomUtils.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +44,10 @@
 		AA23A0EE1A47BDA7009D9492 /* Brain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Brain.h; sourceTree = "<group>"; };
 		AA23A0F01A47BDC1009D9492 /* Neuron.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Neuron.cpp; sourceTree = "<group>"; };
 		AA23A0F11A47BDC1009D9492 /* Neuron.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Neuron.h; sourceTree = "<group>"; };
+		CA9901E41A48459B00190E1B /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
+		CA9901E51A48459B00190E1B /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
+		CA9901E71A4891C000190E1B /* RandomUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RandomUtils.cpp; sourceTree = "<group>"; };
+		CA9901E81A4891C000190E1B /* RandomUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RandomUtils.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +100,10 @@
 				AA23A0EE1A47BDA7009D9492 /* Brain.h */,
 				AA23A0F01A47BDC1009D9492 /* Neuron.cpp */,
 				AA23A0F11A47BDC1009D9492 /* Neuron.h */,
+				CA9901E41A48459B00190E1B /* Camera.cpp */,
+				CA9901E51A48459B00190E1B /* Camera.h */,
+				CA9901E71A4891C000190E1B /* RandomUtils.cpp */,
+				CA9901E81A4891C000190E1B /* RandomUtils.h */,
 			);
 			path = NetEvolution;
 			sourceTree = "<group>";
@@ -188,6 +198,8 @@
 				AA23A0EC1A47BB1F009D9492 /* Agent.cpp in Sources */,
 				AA23A0F21A47BDC1009D9492 /* Neuron.cpp in Sources */,
 				AA23A0E31A47B8B6009D9492 /* GLManager.cpp in Sources */,
+				CA9901E91A4891C000190E1B /* RandomUtils.cpp in Sources */,
+				CA9901E61A48459B00190E1B /* Camera.cpp in Sources */,
 				AA23A0C81A47B5AE009D9492 /* main.cpp in Sources */,
 				AA23A0C51A47B5AE009D9492 /* ResourcePath.mm in Sources */,
 				AA23A0E01A47B784009D9492 /* EvolutionSystem.cpp in Sources */,
@@ -322,6 +334,7 @@
 				AA23A0D61A47B5AE009D9492 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -23,6 +23,12 @@ public:
     inline AgentRenderNode GetRenderNode();
     glm::vec3 Position;
     
+    float Yaw = 0.01, Pitch = 0.0, Roll = 0.01;
+    
+    const float MaxSpeed = 0.001f;
+    
+    glm::vec3 Velocity=glm::vec3(1,0,0);
+    
     void Update();
 private:
     

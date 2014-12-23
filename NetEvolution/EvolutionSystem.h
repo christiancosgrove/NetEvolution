@@ -28,6 +28,7 @@ private:
     void updateBuffers();
     std::vector<AgentRenderNode> renderNodes;
     std::vector<Agent> agents;
+    glm::vec3 domainDimensions = glm::vec3(1,1,1);
     void draw();
     void update();
     void handleEvents();

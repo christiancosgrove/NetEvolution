@@ -11,6 +11,7 @@
 #include <string>
 #include "GLManager.h"
 #include "ResourcePath.hpp"
+#include "Camera.h"
 EvolutionSystem::EvolutionSystem()
 {
     if (SDL_Init(SDL_INIT_VIDEO)) throw std::logic_error("Failed to initialize SDL.  " + std::string(SDL_GetError()));
@@ -25,17 +26,23 @@ EvolutionSystem::EvolutionSystem()
     SDL_GL_SetSwapInterval(1);
     
     
-    window = SDL_CreateWindow("Net Evolution", 0, 0, 1920, 1080, SDL_WINDOW_OPENGL);
+    SDL_SetRelativeMouseMode(SDL_TRUE);
+    
+    window = SDL_CreateWindow("Net Evolution", 0, 0, 1280,720, SDL_WINDOW_OPENGL);
     if (window==nullptr) throw std::logic_error("Window failed to be initialized");
     SDL_GLContext context = SDL_GL_CreateContext(window);
     if (context==nullptr) throw std::logic_error("SDL_GL could not be initialized!");
     
+    Camera camera(1280,720);
     
     GLManager glManager(resourcePath() + "fragmentShader.glsl", resourcePath() + "vertexShader.glsl");
     initializeAgents();
+    generateBuffers();
     while (CurrentProgramState==ProgramState::RUN)
     {
+        glManager.Programs[0].SetMatrix4("transformMatrix", glm::value_ptr(camera.GetTransformMatrix()));
         update();
+        camera.Update();
         draw();
         handleEvents();
         SDL_GL_SwapWindow(window);
@@ -45,13 +52,13 @@ EvolutionSystem::EvolutionSystem()
 
 void EvolutionSystem::initializeAgents()
 {
-    const int w = 3;
-    const float m = 1.5f;
+    const int w = 10;
+    const float m = 0.1f;
     for (int i = 0; i<w;i++)
     {
         for (int j = 0; j<w;j++)
         {
-            for (int k = 0; j<w;k++)
+            for (int k = 0; k<w;k++)
             {
                 agents.push_back(Agent(glm::vec3(m*i,m*j,m*k)));
             }
@@ -99,6 +106,12 @@ void EvolutionSystem::update()
     for (Agent& agent:agents)
     {
         agent.Update();
+    }
+    for (Agent& agent:agents)
+    {
+        if (agent.Position.x<0 || agent.Position.x>domainDimensions.x) agent.Position.x = domainDimensions.x - agent.Position.x;
+        if (agent.Position.y<0 || agent.Position.x>domainDimensions.y) agent.Position.y = domainDimensions.y - agent.Position.y;
+        if (agent.Position.z<0 || agent.Position.x>domainDimensions.z) agent.Position.z = domainDimensions.z - agent.Position.z;
     }
 }
 

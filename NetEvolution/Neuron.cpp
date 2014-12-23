@@ -7,3 +7,23 @@
 //
 
 #include "Neuron.h"
+#include "RandomUtils.h"
+
+Neuron::Neuron()
+{
+    
+}
+
+void Neuron::Update(std::vector<Neuron> &neurons)
+{
+    for (NeuralConnection& con : connections)
+    {
+        neurons[con.connection].IncrementTransferFunction(con.GetActivationFunction(neurons));
+    }
+    
+}
+
+void Neuron::AddConnection(std::vector<Neuron>& neurons, size_t neuronIndex)
+{
+    connections.push_back(NeuralConnection{neuronIndex, RandomUtils::UniformFloat()});
+}
