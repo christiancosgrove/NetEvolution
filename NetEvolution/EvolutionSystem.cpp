@@ -12,6 +12,7 @@
 #include "GLManager.h"
 #include "ResourcePath.hpp"
 #include "Camera.h"
+#include "RandomUtils.h"
 EvolutionSystem::EvolutionSystem()
 {
     if (SDL_Init(SDL_INIT_VIDEO)) throw std::logic_error("Failed to initialize SDL.  " + std::string(SDL_GetError()));
@@ -26,13 +27,13 @@ EvolutionSystem::EvolutionSystem()
     SDL_GL_SetSwapInterval(1);
     
     
-    SDL_SetRelativeMouseMode(SDL_TRUE);
-    
     window = SDL_CreateWindow("Net Evolution", 0, 0, 1280,720, SDL_WINDOW_OPENGL);
     if (window==nullptr) throw std::logic_error("Window failed to be initialized");
     SDL_GLContext context = SDL_GL_CreateContext(window);
     if (context==nullptr) throw std::logic_error("SDL_GL could not be initialized!");
     
+    
+    SDL_SetRelativeMouseMode(SDL_TRUE);
     Camera camera(1280,720);
     
     GLManager glManager(resourcePath() + "fragmentShader.glsl", resourcePath() + "vertexShader.glsl");
@@ -52,17 +53,24 @@ EvolutionSystem::EvolutionSystem()
 
 void EvolutionSystem::initializeAgents()
 {
-    const int w = 10;
-    const float m = 0.1f;
-    for (int i = 0; i<w;i++)
+    const int agentCount = 10;
+    for (int i = 0; i<agentCount;i++)
     {
-        for (int j = 0; j<w;j++)
-        {
-            for (int k = 0; k<w;k++)
-            {
-                agents.push_back(Agent(glm::vec3(m*i,m*j,m*k)));
-            }
-        }
+        agents.push_back(Agent(
+            glm::vec3(
+                      RandomUtils::Uniform<float>(0, domainDimensions.x),
+                      RandomUtils::Uniform<float>(0, domainDimensions.y),
+                      RandomUtils::Uniform<float>(0, domainDimensions.z))));
+    }
+    
+    const int plantCount = 10;
+    for (int i = 0; i<plantCount;i++)
+    {
+        plants.push_back(Plant(
+            glm::vec3(
+                      RandomUtils::Uniform<float>(0, domainDimensions.x),
+                      RandomUtils::Uniform<float>(0, domainDimensions.y),
+                      RandomUtils::Uniform<float>(0, domainDimensions.z))));
     }
 }
 
@@ -105,7 +113,7 @@ void EvolutionSystem::update()
 {
     for (Agent& agent:agents)
     {
-        agent.Update();
+        agent.Update(plants);
     }
     for (Agent& agent:agents)
     {
@@ -122,7 +130,9 @@ void EvolutionSystem::generateBuffers()
     glGenBuffers(1, &vbo);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
     glEnableVertexAttribArray(0);
+    glEnableVertexAttribArray(1);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(AgentRenderNode), (void*)__offsetof(AgentRenderNode, position));
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(AgentRenderNode), (void*)__offsetof(AgentRenderNode, color));
     glBindVertexArray(0);
 }
 
@@ -131,8 +141,10 @@ void EvolutionSystem::updateBuffers()
     renderNodes.clear();
     renderNodes.reserve(agents.size());
     for (Agent& agent:agents) renderNodes.push_back(agent.GetRenderNode());
+    for (Plant& plant:plants) renderNodes.push_back(plant.GetRenderNode());
     
     glBindVertexArray(vao);
     glBufferData(GL_ARRAY_BUFFER, sizeof(AgentRenderNode) * renderNodes.size(), &renderNodes[0], GL_DYNAMIC_DRAW);
     glBindVertexArray(0);
 }
+

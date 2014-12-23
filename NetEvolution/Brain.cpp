@@ -30,7 +30,7 @@ Brain::Brain()
     {
         for (int j=0;j<HIDDEN_LAYER_WIDTH;j++)
         {
-            GetNeuron(0, i).AddConnection(neurons, GetNeuronIndex(1, j));
+            GetNeuron(1, j).AddConnection(neurons, GetNeuronIndex(0, i));
         }
     }
     for (int k = 1;k<NUM_LAYERS-1;k++)
@@ -39,8 +39,15 @@ Brain::Brain()
         {
             for (int j = 0; j<HIDDEN_LAYER_WIDTH;j++)
             {
-                GetNeuron(k,i).AddConnection(neurons, GetNeuronIndex(k+1, j));
+                GetNeuron(k,j).AddConnection(neurons, GetNeuronIndex(k-1, i));
             }
+        }
+    }
+    for (int i = 0; i<HIDDEN_LAYER_WIDTH;i++)
+    {
+        for (int j = 0; j<OUTPUT_LAYER_WIDTH;j++)
+        {
+            GetNeuron(NUM_LAYERS-1, j).AddConnection(neurons, GetNeuronIndex(NUM_LAYERS-1, i));
         }
     }
 }
@@ -51,4 +58,14 @@ void Brain::Update()
     {
         neuron.Update(neurons);
     }
+}
+
+void Brain::DuplicateBrain(const Brain &brain)
+{
+    if (neurons.size()!=brain.neurons.size()) throw std::out_of_range("Brain sizes do not match.");
+    for (int i = 0; i<brain.neurons.size();i++)
+    {
+        neurons[i] = brain.neurons[i];
+    }
+        
 }

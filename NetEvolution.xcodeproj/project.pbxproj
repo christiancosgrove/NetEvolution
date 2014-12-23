@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AA173BB91A48F0C200E5DDC6 /* Plant.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA173BB71A48F0C200E5DDC6 /* Plant.cpp */; };
+		AA173BBC1A48F3AD00E5DDC6 /* AgentRenderNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA173BBA1A48F3AD00E5DDC6 /* AgentRenderNode.cpp */; };
 		AA23A0C51A47B5AE009D9492 /* ResourcePath.mm in Sources */ = {isa = PBXBuildFile; fileRef = AA23A0C41A47B5AE009D9492 /* ResourcePath.mm */; };
 		AA23A0C81A47B5AE009D9492 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA23A0C71A47B5AE009D9492 /* main.cpp */; };
 		AA23A0D81A47B6F0009D9492 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA23A0D71A47B6F0009D9492 /* OpenGL.framework */; };
@@ -24,6 +26,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AA173BB71A48F0C200E5DDC6 /* Plant.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Plant.cpp; sourceTree = "<group>"; };
+		AA173BB81A48F0C200E5DDC6 /* Plant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plant.h; sourceTree = "<group>"; };
+		AA173BBA1A48F3AD00E5DDC6 /* AgentRenderNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AgentRenderNode.cpp; sourceTree = "<group>"; };
+		AA173BBB1A48F3AD00E5DDC6 /* AgentRenderNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgentRenderNode.h; sourceTree = "<group>"; };
 		AA23A0BF1A47B5AE009D9492 /* NetEvolution.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NetEvolution.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA23A0C31A47B5AE009D9492 /* NetEvolution-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NetEvolution-Info.plist"; sourceTree = "<group>"; };
 		AA23A0C41A47B5AE009D9492 /* ResourcePath.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ResourcePath.mm; sourceTree = "<group>"; };
@@ -104,6 +110,10 @@
 				CA9901E51A48459B00190E1B /* Camera.h */,
 				CA9901E71A4891C000190E1B /* RandomUtils.cpp */,
 				CA9901E81A4891C000190E1B /* RandomUtils.h */,
+				AA173BB71A48F0C200E5DDC6 /* Plant.cpp */,
+				AA173BB81A48F0C200E5DDC6 /* Plant.h */,
+				AA173BBA1A48F3AD00E5DDC6 /* AgentRenderNode.cpp */,
+				AA173BBB1A48F3AD00E5DDC6 /* AgentRenderNode.h */,
 			);
 			path = NetEvolution;
 			sourceTree = "<group>";
@@ -201,7 +211,9 @@
 				CA9901E91A4891C000190E1B /* RandomUtils.cpp in Sources */,
 				CA9901E61A48459B00190E1B /* Camera.cpp in Sources */,
 				AA23A0C81A47B5AE009D9492 /* main.cpp in Sources */,
+				AA173BB91A48F0C200E5DDC6 /* Plant.cpp in Sources */,
 				AA23A0C51A47B5AE009D9492 /* ResourcePath.mm in Sources */,
+				AA173BBC1A48F3AD00E5DDC6 /* AgentRenderNode.cpp in Sources */,
 				AA23A0E01A47B784009D9492 /* EvolutionSystem.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

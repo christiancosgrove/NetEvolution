@@ -17,11 +17,12 @@ public:
         float weight;
         inline float GetActivationFunction(std::vector<Neuron>& neurons)
         {
-            return atan(neurons[connection].GetTransferFunction());
+            return 0.5f * atan(neurons[connection].GetTransferFunction()) * weight + 0.5f;
         }
     };
     
     Neuron();
+    Neuron(const Neuron& copy);
     
     std::vector<NeuralConnection> connections;
     void Update(std::vector<Neuron>& neurons);
@@ -30,9 +31,14 @@ public:
     
     inline void IncrementTransferFunction(float value);
     inline float GetTransferFunction();
+    inline void ResetTransferFunction();
+    inline void SetInputNeuron(float value);
 private:
-    float transferFunction;
+    float transferFunctionDefault = 0;
+    float transferFunction = 0;
 };
 
+void Neuron::SetInputNeuron(float value) { transferFunctionDefault += value; }
 void Neuron::IncrementTransferFunction(float value) { transferFunction+=value; }
 float Neuron::GetTransferFunction() { return transferFunction; }
+void Neuron::ResetTransferFunction() { transferFunction=transferFunctionDefault; }

@@ -9,12 +9,8 @@
 #pragma once
 #include "glm/glm.hpp"
 #include "Brain.h"
-
-struct AgentRenderNode
-{
-    glm::vec3 position;
-    
-};
+#include "AgentRenderNode.h"
+#include "Plant.h"
 
 class Agent
 {
@@ -25,13 +21,17 @@ public:
     
     float Yaw = 0.01, Pitch = 0.0, Roll = 0.01;
     
+    static const float MAX_HEALTH;
+    float Health = MAX_HEALTH;
+    
     const float MaxSpeed = 0.001f;
     
     glm::vec3 Velocity=glm::vec3(1,0,0);
     
-    void Update();
+    void Update(std::vector<Plant>& plants);
 private:
+    Brain brain;
     
 };
 
-AgentRenderNode Agent::GetRenderNode() { return AgentRenderNode{Position}; }
+AgentRenderNode Agent::GetRenderNode() { return AgentRenderNode{Position, glm::vec3(1,0,0)}; }

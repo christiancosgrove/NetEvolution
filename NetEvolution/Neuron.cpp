@@ -14,16 +14,24 @@ Neuron::Neuron()
     
 }
 
+Neuron::Neuron(const Neuron& copy) : connections(copy.connections), transferFunctionDefault(copy.transferFunctionDefault)
+{
+
+}
+
+
 void Neuron::Update(std::vector<Neuron> &neurons)
 {
+    transferFunction = transferFunctionDefault;
     for (NeuralConnection& con : connections)
     {
-        neurons[con.connection].IncrementTransferFunction(con.GetActivationFunction(neurons));
+        IncrementTransferFunction(con.GetActivationFunction(neurons));
     }
     
 }
 
 void Neuron::AddConnection(std::vector<Neuron>& neurons, size_t neuronIndex)
 {
-    connections.push_back(NeuralConnection{neuronIndex, RandomUtils::UniformFloat()});
+    if (neuronIndex > neurons.size()) throw std::out_of_range("Out of neuron array size");
+    connections.push_back(NeuralConnection{neuronIndex, RandomUtils::Uniform<float>(-1,1)});
 }
