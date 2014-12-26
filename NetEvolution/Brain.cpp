@@ -7,7 +7,7 @@
 //
 
 #include "Brain.h"
-
+#include "RandomUtils.h"
 
 Brain::Brain()
 {
@@ -62,10 +62,35 @@ void Brain::Update()
 
 void Brain::DuplicateBrain(const Brain &brain)
 {
-    if (neurons.size()!=brain.neurons.size()) throw std::out_of_range("Brain sizes do not match.");
+    
+    if (neurons.size()!=brain.neurons.size() || NUM_LAYERS!=brain.NUM_LAYERS || HIDDEN_LAYER_WIDTH!=brain.HIDDEN_LAYER_WIDTH || INPUT_LAYER_WIDTH!=brain.INPUT_LAYER_WIDTH || OUTPUT_LAYER_WIDTH!=brain.OUTPUT_LAYER_WIDTH) throw std::out_of_range("Brain sizes do not match.");
     for (int i = 0; i<brain.neurons.size();i++)
     {
         neurons[i] = brain.neurons[i];
     }
-        
+    Mutate();
+}
+
+void Brain::Reset()
+{
+    for (Neuron& neuron:neurons)
+    {
+        for (Neuron::NeuralConnection& con:neuron.connections)
+        {
+            con.weight=RandomUtils::Uniform<float>(-1,1);
+        }
+    }
+}
+void Brain::Mutate()
+{
+    const float mutationRate=0.1f;
+    for (Neuron& neuron:neurons)
+    {
+        for (Neuron::NeuralConnection& con:neuron.connections)
+        {
+            con.weight+=RandomUtils::Uniform<float>(-mutationRate,mutationRate);
+            if (con.weight<-1)con.weight=-1;
+            if (con.weight>1)con.weight=1;
+        }
+    }
 }

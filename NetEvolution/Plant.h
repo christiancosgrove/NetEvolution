@@ -16,7 +16,10 @@ public:
     glm::vec3 Position;
     static const float MAX_HEALTH;
     float Health = MAX_HEALTH;
+    float Radius =0.025f;
+    bool Active=true;
     inline AgentRenderNode GetRenderNode();
+    void Update();
 private:
 };
 

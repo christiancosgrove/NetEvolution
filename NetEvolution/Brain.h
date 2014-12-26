@@ -15,17 +15,18 @@ public:
     Brain();
     
     void DuplicateBrain(const Brain& brain);
-    
     const int NUM_LAYERS = 3;
-    const int HIDDEN_LAYER_WIDTH = 3;
-    const int INPUT_LAYER_WIDTH = 2;
+    const int HIDDEN_LAYER_WIDTH = 2;
+    const int INPUT_LAYER_WIDTH = 3;
     const int OUTPUT_LAYER_WIDTH = 3;
+    void Reset();
     inline int NUM_NEURONS() const;
     inline int GetNeuronIndex(int layerIndex, int index) const;
     inline Neuron& GetNeuron(int layerIndex, int index);
     inline Neuron& GetOutputNeuron(int index);
     inline Neuron& GetInputNeuron(int index);
     void Update();
+    void Mutate();
 private:
     std::vector<Neuron> neurons;
 };

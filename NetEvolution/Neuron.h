@@ -17,7 +17,7 @@ public:
         float weight;
         inline float GetActivationFunction(std::vector<Neuron>& neurons)
         {
-            return 0.5f * atan(neurons[connection].GetTransferFunction()) * weight + 0.5f;
+            return (0.5f*atan(neurons[connection].GetTransferFunction()) + 0.5f)*weight;
         }
     };
     

@@ -42,7 +42,11 @@ EvolutionSystem::EvolutionSystem()
     while (CurrentProgramState==ProgramState::RUN)
     {
         glManager.Programs[0].SetMatrix4("transformMatrix", glm::value_ptr(camera.GetTransformMatrix()));
-        update();
+        
+        if (accelerate)
+            for (int i = 0; i<100;i++)
+            update();
+        else update();
         camera.Update();
         draw();
         handleEvents();
@@ -63,7 +67,7 @@ void EvolutionSystem::initializeAgents()
                       RandomUtils::Uniform<float>(0, domainDimensions.z))));
     }
     
-    const int plantCount = 10;
+    const int plantCount = 30;
     for (int i = 0; i<plantCount;i++)
     {
         plants.push_back(Plant(
@@ -91,8 +95,12 @@ void EvolutionSystem::handleEvents()
                 case SDL_SCANCODE_ESCAPE:
                     CurrentProgramState = ProgramState::EXIT;
                     break;
+                case SDL_SCANCODE_SPACE:
+                    accelerate=!accelerate;
+                    break;
                 default: break;
             }
+                
             default: break;
         }
     }
@@ -115,12 +123,24 @@ void EvolutionSystem::update()
     {
         agent.Update(plants);
     }
+    for (Plant& plant:plants)
+    {
+        plant.Update();
+    }
     for (Agent& agent:agents)
     {
-        if (agent.Position.x<0 || agent.Position.x>domainDimensions.x) agent.Position.x = domainDimensions.x - agent.Position.x;
-        if (agent.Position.y<0 || agent.Position.x>domainDimensions.y) agent.Position.y = domainDimensions.y - agent.Position.y;
-        if (agent.Position.z<0 || agent.Position.x>domainDimensions.z) agent.Position.z = domainDimensions.z - agent.Position.z;
+        if (agent.Position.x<0) agent.Position.x = domainDimensions.x + agent.Position.x;
+        if (agent.Position.y<0) agent.Position.y = domainDimensions.y + agent.Position.y;
+        if (agent.Position.z<0) agent.Position.z = domainDimensions.z + agent.Position.z;
+        
+        if (agent.Position.x>domainDimensions.x) agent.Position.x = agent.Position.x - domainDimensions.x;
+        if (agent.Position.y>domainDimensions.y) agent.Position.y = agent.Position.y - domainDimensions.y;
+        if (agent.Position.z>domainDimensions.z) agent.Position.z = agent.Position.z - domainDimensions.z;
     }
+    time++;
+    if (time%(int)Agent::MAX_HEALTH==0) pollAgents();
+    
+    newAgents();
 }
 
 void EvolutionSystem::generateBuffers()
@@ -140,11 +160,72 @@ void EvolutionSystem::updateBuffers()
 {
     renderNodes.clear();
     renderNodes.reserve(agents.size());
-    for (Agent& agent:agents) renderNodes.push_back(agent.GetRenderNode());
-    for (Plant& plant:plants) renderNodes.push_back(plant.GetRenderNode());
+    for (Agent& agent:agents) if (agent.Active) renderNodes.push_back(agent.GetRenderNode());
+    for (Plant& plant:plants) if (plant.Active) renderNodes.push_back(plant.GetRenderNode());
     
     glBindVertexArray(vao);
     glBufferData(GL_ARRAY_BUFFER, sizeof(AgentRenderNode) * renderNodes.size(), &renderNodes[0], GL_DYNAMIC_DRAW);
     glBindVertexArray(0);
 }
 
+void EvolutionSystem::newAgents()
+{
+    std::vector<float> probabilities(agents.size());
+    std::vector<int> intervals(agents.size(),1.0);
+    
+    for (int i = 0; i<agents.size();i++)
+    {
+        probabilities[i] = agents[i].Health;
+    }
+    
+    std::piecewise_constant_distribution<float> distrib(intervals.begin(), intervals.end(), probabilities.begin());
+    
+    
+    
+    std::vector<Agent*> aliveAgents;
+//    std::vector<float> probabilities;
+    for (Agent& agent:agents) if (agent.Active) aliveAgents.push_back(&agent);
+    for (int i = 0; i<agents.size();i++)
+    {
+        Agent& agent = agents[i];
+        if (!agent.Active && aliveAgents.size()>1)
+        {
+            int randInd =(int)distrib(RandomUtils::rand);
+            agent.Duplicate(agents[randInd]);
+            agent.Position =
+            glm::vec3(
+                      RandomUtils::Uniform<float>(0, domainDimensions.x),
+                      RandomUtils::Uniform<float>(0, domainDimensions.y),
+                      RandomUtils::Uniform<float>(0, domainDimensions.z));
+        }
+        else if (!agent.Active)
+        {
+            agent.Reset();
+            agent.Position =
+            glm::vec3(
+                      RandomUtils::Uniform<float>(0, domainDimensions.x),
+                      RandomUtils::Uniform<float>(0, domainDimensions.y),
+                      RandomUtils::Uniform<float>(0, domainDimensions.z));
+        }
+    }
+    for (Plant& plant:plants)
+    {
+        if (!plant.Active)
+        {
+            plant.Position =
+            glm::vec3(
+                      RandomUtils::Uniform<float>(0, domainDimensions.x),
+                      RandomUtils::Uniform<float>(0, domainDimensions.y),
+                      RandomUtils::Uniform<float>(0, domainDimensions.z));
+            plant.Health=plant.MAX_HEALTH;
+            plant.Active=true;
+        }
+    }
+}
+
+void EvolutionSystem::pollAgents()
+{
+    float totHealth =0;
+    for(Agent& agent:agents) totHealth+=agent.Health;
+    printf("Average health: %f\n", totHealth/agents.size());
+}

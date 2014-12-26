@@ -35,4 +35,10 @@ private:
     void update();
     void handleEvents();
     void initializeAgents();
+    void newAgents();
+    
+    int time=0;
+    void pollAgents();
+    
+    bool accelerate=false;
 };

@@ -27,7 +27,7 @@ void Neuron::Update(std::vector<Neuron> &neurons)
     {
         IncrementTransferFunction(con.GetActivationFunction(neurons));
     }
-    
+    transferFunction/=connections.size();
 }
 
 void Neuron::AddConnection(std::vector<Neuron>& neurons, size_t neuronIndex)
