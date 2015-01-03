@@ -17,7 +17,7 @@ public:
     glm::mat4 GetTransformMatrix();
     glm::mat4 GetProjectionMatrix();
     void Update();
-    float FieldOfView = 90;
+    float FieldOfView = 60;
     const float FAR_PLANE;
     const float NEAR_PLANE;
     inline glm::vec3 GetPosition();

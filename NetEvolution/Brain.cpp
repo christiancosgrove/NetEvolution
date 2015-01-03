@@ -26,16 +26,9 @@ Brain::Brain()
     {
         neurons.push_back(Neuron());
     }
-    for (int i = 0; i<INPUT_LAYER_WIDTH;i++)
-    {
-        for (int j=0;j<HIDDEN_LAYER_WIDTH;j++)
-        {
-            GetNeuron(1, j).AddConnection(neurons, GetNeuronIndex(0, i));
-        }
-    }
     for (int k = 1;k<NUM_LAYERS-1;k++)
     {
-        for (int i=0;i<HIDDEN_LAYER_WIDTH;i++)
+        for (int i=0;i<(k==1 ? INPUT_LAYER_WIDTH : HIDDEN_LAYER_WIDTH);i++)
         {
             for (int j = 0; j<HIDDEN_LAYER_WIDTH;j++)
             {
@@ -47,7 +40,7 @@ Brain::Brain()
     {
         for (int j = 0; j<OUTPUT_LAYER_WIDTH;j++)
         {
-            GetNeuron(NUM_LAYERS-1, j).AddConnection(neurons, GetNeuronIndex(NUM_LAYERS-1, i));
+            GetNeuron(NUM_LAYERS-1, j).AddConnection(neurons, GetNeuronIndex(NUM_LAYERS-2, i));
         }
     }
 }
@@ -83,14 +76,18 @@ void Brain::Reset()
 }
 void Brain::Mutate()
 {
-    const float mutationRate=0.1f;
+    const float mutationAmount=0.1f;
+    const float mutationRate = 0.01f;
     for (Neuron& neuron:neurons)
     {
         for (Neuron::NeuralConnection& con:neuron.connections)
         {
-            con.weight+=RandomUtils::Uniform<float>(-mutationRate,mutationRate);
-            if (con.weight<-1)con.weight=-1;
-            if (con.weight>1)con.weight=1;
+            if (RandomUtils::UniformFloat() < mutationRate)
+            {
+                con.weight+=RandomUtils::Normal<float>(0, mutationAmount);
+                if (con.weight<-1)con.weight=-1;
+                if (con.weight>1)con.weight=1;
+            }
         }
     }
 }

@@ -11,6 +11,7 @@
 #include "Agent.h"
 #include <OpenGL/gl3.h>
 #include "Plant.h"
+#include <string>
 class EvolutionSystem
 {
 public:
@@ -36,8 +37,12 @@ private:
     void handleEvents();
     void initializeAgents();
     void newAgents();
+    std::string fileLocation = "/Users/christian/Desktop/performance.csv";
     
     int time=0;
+    
+    const int plantSpawnDelay=10;
+    int lastPlantSpawn=0;
     void pollAgents();
     
     bool accelerate=false;

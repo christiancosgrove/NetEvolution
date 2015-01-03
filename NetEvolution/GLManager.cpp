@@ -40,7 +40,7 @@ void GLManager::initGL()
 {
     glDisable(GL_CULL_FACE);
     glDisable(GL_DEPTH_TEST);
-    glPointSize(5);
+    glPointSize(3);
     
     
 }

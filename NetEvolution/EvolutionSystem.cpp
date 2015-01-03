@@ -13,6 +13,7 @@
 #include "ResourcePath.hpp"
 #include "Camera.h"
 #include "RandomUtils.h"
+#include <fstream>break
 EvolutionSystem::EvolutionSystem()
 {
     if (SDL_Init(SDL_INIT_VIDEO)) throw std::logic_error("Failed to initialize SDL.  " + std::string(SDL_GetError()));
@@ -39,12 +40,18 @@ EvolutionSystem::EvolutionSystem()
     GLManager glManager(resourcePath() + "fragmentShader.glsl", resourcePath() + "vertexShader.glsl");
     initializeAgents();
     generateBuffers();
+    
+    {
+        std::ofstream stream(fileLocation, std::ios::out);
+        stream << "time,avg talive,max talive,avg health,max health" << std::endl;
+    
+    }
     while (CurrentProgramState==ProgramState::RUN)
     {
         glManager.Programs[0].SetMatrix4("transformMatrix", glm::value_ptr(camera.GetTransformMatrix()));
         
         if (accelerate)
-            for (int i = 0; i<100;i++)
+            for (int i = 0; i<3000;i++)
             update();
         else update();
         camera.Update();
@@ -57,7 +64,7 @@ EvolutionSystem::EvolutionSystem()
 
 void EvolutionSystem::initializeAgents()
 {
-    const int agentCount = 10;
+    const int agentCount = 100;
     for (int i = 0; i<agentCount;i++)
     {
         agents.push_back(Agent(
@@ -67,7 +74,7 @@ void EvolutionSystem::initializeAgents()
                       RandomUtils::Uniform<float>(0, domainDimensions.z))));
     }
     
-    const int plantCount = 30;
+    const int plantCount = 100;
     for (int i = 0; i<plantCount;i++)
     {
         plants.push_back(Plant(
@@ -121,7 +128,7 @@ void EvolutionSystem::update()
 {
     for (Agent& agent:agents)
     {
-        agent.Update(plants);
+        agent.Update(plants, agents);
     }
     for (Plant& plant:plants)
     {
@@ -138,6 +145,7 @@ void EvolutionSystem::update()
         if (agent.Position.z>domainDimensions.z) agent.Position.z = agent.Position.z - domainDimensions.z;
     }
     time++;
+    lastPlantSpawn--;
     if (time%(int)Agent::MAX_HEALTH==0) pollAgents();
     
     newAgents();
@@ -167,50 +175,60 @@ void EvolutionSystem::updateBuffers()
     glBufferData(GL_ARRAY_BUFFER, sizeof(AgentRenderNode) * renderNodes.size(), &renderNodes[0], GL_DYNAMIC_DRAW);
     glBindVertexArray(0);
 }
-
+#include <iostream>
 void EvolutionSystem::newAgents()
 {
     std::vector<float> probabilities(agents.size());
-    std::vector<int> intervals(agents.size(),1.0);
+    std::vector<float> intervals(agents.size());
+    for (int i = 0; i<agents.size();i++) intervals[i]=i;
     
+    int aliveAgents = 0;
+    
+    float totalTimeAlive = 0;
     for (int i = 0; i<agents.size();i++)
     {
-        probabilities[i] = agents[i].Health;
+        probabilities[i] = agents[i].TimeAlive;
+        totalTimeAlive+=agents[i].TimeAlive;
+        if (agents[i].Active) aliveAgents++;
     }
     
+    for(float& i : probabilities) i/=totalTimeAlive;
+    
     std::piecewise_constant_distribution<float> distrib(intervals.begin(), intervals.end(), probabilities.begin());
+//    for (float i:probabilities) std::cout << i << " "; std::cout << std::endl;
     
     
-    
-    std::vector<Agent*> aliveAgents;
-//    std::vector<float> probabilities;
-    for (Agent& agent:agents) if (agent.Active) aliveAgents.push_back(&agent);
     for (int i = 0; i<agents.size();i++)
     {
         Agent& agent = agents[i];
-        if (!agent.Active && aliveAgents.size()>1)
+        if (!agent.Active)
         {
-            int randInd =(int)distrib(RandomUtils::rand);
-            agent.Duplicate(agents[randInd]);
-            agent.Position =
-            glm::vec3(
-                      RandomUtils::Uniform<float>(0, domainDimensions.x),
-                      RandomUtils::Uniform<float>(0, domainDimensions.y),
-                      RandomUtils::Uniform<float>(0, domainDimensions.z));
-        }
-        else if (!agent.Active)
-        {
-            agent.Reset();
-            agent.Position =
-            glm::vec3(
-                      RandomUtils::Uniform<float>(0, domainDimensions.x),
-                      RandomUtils::Uniform<float>(0, domainDimensions.y),
-                      RandomUtils::Uniform<float>(0, domainDimensions.z));
+            if (aliveAgents>0)
+            {
+                float randInd =distrib(RandomUtils::rand);
+//                std::cout<<randInd<<std::endl;
+                agent.Duplicate(agents[(int)randInd]);
+                
+                agent.Position =
+                glm::vec3(
+                          RandomUtils::Uniform<float>(0, domainDimensions.x),
+                          RandomUtils::Uniform<float>(0, domainDimensions.y),
+                          RandomUtils::Uniform<float>(0, domainDimensions.z));
+            }
+            else
+            {
+                agent.Reset();
+                agent.Position =
+                glm::vec3(
+                          RandomUtils::Uniform<float>(0, domainDimensions.x),
+                          RandomUtils::Uniform<float>(0, domainDimensions.y),
+                          RandomUtils::Uniform<float>(0, domainDimensions.z));
+            }
         }
     }
     for (Plant& plant:plants)
     {
-        if (!plant.Active)
+        if (!plant.Active && lastPlantSpawn<=0)
         {
             plant.Position =
             glm::vec3(
@@ -219,13 +237,23 @@ void EvolutionSystem::newAgents()
                       RandomUtils::Uniform<float>(0, domainDimensions.z));
             plant.Health=plant.MAX_HEALTH;
             plant.Active=true;
+            lastPlantSpawn=plantSpawnDelay;
         }
     }
+    
 }
 
 void EvolutionSystem::pollAgents()
 {
-    float totHealth =0;
-    for(Agent& agent:agents) totHealth+=agent.Health;
-    printf("Average health: %f\n", totHealth/agents.size());
+    float totTimeAlive=0, maxTimeAlive=00, totHealth=0, maxHealth;
+    for(Agent& agent:agents)
+    {
+        totHealth+=agent.Health;
+        totTimeAlive+=agent.TimeAlive;
+        if (agent.Health>maxHealth) maxHealth=agent.Health;
+        if (agent.TimeAlive>maxTimeAlive) maxTimeAlive=agent.TimeAlive ;
+    }
+    std::ofstream stream(fileLocation, std::ios::out | std::ios::app);
+    stream  << time << "," << totTimeAlive/agents.size() << "," << maxTimeAlive << "," << totHealth / agents.size() << maxHealth << std::endl;
+    printf("avg talive: %f, max talive: %f, avg health: %f, max health %f\n", totTimeAlive/agents.size(), maxTimeAlive, totHealth / agents.size(), maxHealth);
 }

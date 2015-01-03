@@ -15,10 +15,10 @@ public:
     Brain();
     
     void DuplicateBrain(const Brain& brain);
-    const int NUM_LAYERS = 3;
-    const int HIDDEN_LAYER_WIDTH = 2;
-    const int INPUT_LAYER_WIDTH = 3;
-    const int OUTPUT_LAYER_WIDTH = 3;
+    const int NUM_LAYERS = 4;
+    const int HIDDEN_LAYER_WIDTH = 7;
+    const int INPUT_LAYER_WIDTH = 9;
+    const int OUTPUT_LAYER_WIDTH = 4;
     void Reset();
     inline int NUM_NEURONS() const;
     inline int GetNeuronIndex(int layerIndex, int index) const;
@@ -46,6 +46,10 @@ int Brain::GetNeuronIndex(int layerIndex, int index) const
 
 Neuron& Brain::GetNeuron(int layerIndex, int index)
 {
+    if (layerIndex >=NUM_LAYERS
+        || (layerIndex==0 && index >= INPUT_LAYER_WIDTH)
+        || (layerIndex!=0 && layerIndex != NUM_LAYERS-1 && index>=HIDDEN_LAYER_WIDTH)
+        || (layerIndex==NUM_LAYERS-1 && index >= OUTPUT_LAYER_WIDTH)) throw std::out_of_range("Out of neuron index range!");
     return neurons[GetNeuronIndex(layerIndex, index)];
 }
 
